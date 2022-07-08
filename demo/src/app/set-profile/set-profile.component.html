@@ -1,0 +1,391 @@
+<div class="logo">
+  <img src="../../assets/images/logo.png" height="60px" alt="" />
+</div>
+<div class="container mb-5">
+  <form [formGroup]="setprofileform">
+    <div class="main mt-5 border content main w-75 mx-auto border border-light">
+      <div class="row">
+        <p class="text-start" style="color: gray">
+          Please provide following details to complete your profile :
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <label for="upload">
+            <input
+              type="file"
+              accept="image/*"
+              id="upload"
+              style="display: none"
+              (change)="onFileChanged($event)"
+              aria-hidden="true"
+              formControlName="avatar"
+            />
+
+            <img
+              *ngIf="!imagePath"
+              src="../assets/images/user.svg"
+              alt=""
+              height="100px"
+              width="100px"
+              style="cursor: pointer"
+            />
+            <img
+              *ngIf="imagePath"
+              [src]="url"
+              alt=""
+              height="100px"
+              width="100px"
+              style="border-radius: 100%"
+            />
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <p class="font-weight-900">Basic Details :</p>
+      </div>
+      <div class="hr"></div>
+
+      <div class="basic-details">
+        <div class="row">
+          <div class="col">
+            <input
+              type="date"
+              placeholder="Date of birth"
+              class="form-control"
+              formControlName="dateOfBirth"
+            />
+          </div>
+          <div
+            *ngIf="
+              setprofileform.get('dateOfBirth')?.hasError('required') &&
+              setprofileform.get('dateOfBirth')?.touched
+            "
+            style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+          >
+            Date is required
+          </div>
+          <div class="col"></div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <input
+              type="text"
+              placeholder="Address line 1"
+              class="form-control"
+              formControlName="addressLine1"
+            />
+            <div
+              *ngIf="
+                setprofileform.get('addressLine1')?.hasError('required') &&
+                setprofileform.get('addressLine1')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              Address is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <input
+              type="text"
+              placeholder="Address line 2"
+              class="form-control"
+              formControlName="addressLine2"
+            />
+            <div
+              *ngIf="
+                setprofileform.get('addressLine2')?.hasError('required') &&
+                setprofileform.get('addressLine2')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              Address is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row mobile-row">
+          <div class="col">
+            <input
+              type="text"
+              placeholder="Postal code"
+              class="form-control"
+              formControlName="postalCode"
+            />
+            <div
+              *ngIf="
+                setprofileform.get('postalCode')?.hasError('required') &&
+                setprofileform.get('postalCode')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              Postal Code is required
+            </div>
+            <div
+              *ngIf="
+                setprofileform.get('postalCode')?.hasError('min') &&
+                setprofileform.get('postalCode')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              Postal Code digit size is 6
+            </div>
+            <div
+              *ngIf="
+                setprofileform.get('postalCode')?.hasError('max') &&
+                setprofileform.get('postalCode')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              Postal Code digit size is 6
+            </div>
+          </div>
+          <div class="col">
+            <div id="city">
+              <select class="form-control" formControlName="city">
+                <option selected value="">City</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Baroda">Baroda</option>
+                <option value="Pune">Pune</option>
+              </select>
+            </div>
+
+            <div
+              *ngIf="
+                setprofileform.get('city')?.hasError('required') &&
+                setprofileform.get('city')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              City is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row mobile-row">
+          <div class="col">
+            <select class="form-control" formControlName="state">
+              <option selected value="">State</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Goa">Goa</option>
+            </select>
+            <div
+              *ngIf="
+                setprofileform.get('state')?.hasError('required') &&
+                setprofileform.get('state')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              State is required
+            </div>
+          </div>
+
+          <div class="col">
+            <select class="form-control" formControlName="LGA">
+              <option selected value="">LGA</option>
+              <option value="Student">Student</option>
+              <option value="Employee">Employee</option>
+              <option value="Worker">Worker</option>
+            </select>
+            <div
+              *ngIf="
+                setprofileform.get('LGA')?.hasError('required') &&
+                setprofileform.get('LGA')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              LGA is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row mobile-row">
+          <div class="col">
+            <select class="form-control" formControlName="country">
+              <option selected value="">Country</option>
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+              <option value="UK">UK</option>
+            </select>
+            <div
+              *ngIf="
+                setprofileform.get('country')?.hasError('required') &&
+                setprofileform.get('country')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              Country is required
+            </div>
+          </div>
+          <div class="col">
+            <select class="form-control" formControlName="DailyWages">
+              <option selected value="">Daily Woges</option>
+              <option value="28.90">28.90</option>
+              <option value="66.92">66.92</option>
+              <option value="88.66">88.66</option>
+            </select>
+            <div
+              *ngIf="
+                setprofileform.get('DailyWages')?.hasError('required') &&
+                setprofileform.get('DailyWages')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              Daily Wages is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <p class="font-weight-900">Educational Details & Skill Sets :</p>
+      </div>
+      <div class="hr"></div>
+
+      <div class="education">
+        <div class="row mobile-row">
+          <div class="col">
+            <select class="form-control" formControlName="degreeDetails">
+              <option selected value="">Most recent Education Degree</option>
+              <option value="M.SC">M.SC</option>
+              <option value="B.SC">B.SC</option>
+              <option value="B.Com">B.Com</option>
+            </select>
+            <div
+              *ngIf="
+                setprofileform.get('degreeDetails')?.hasError('required') &&
+                setprofileform.get('degreeDetails')?.touched
+              "
+              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+            >
+              Degree Detail is required
+            </div>
+          </div>
+          <div class="col">
+            Upload certification(If Any) :
+            <button class="browse" (change)="educertificate($event)">
+              <label for="upload1">
+                <input
+                  type="file"
+                  aria-hidden="true"
+                  id="upload1"
+                  accept="image/"
+                  style="display: none"
+                  formControlName="edu_certificate"
+                />
+                Browse
+              </label>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <p class="font-weight-900">Skill Sets & Trade :</p>
+
+        <div class="row m-2 table-res" style="overflow: scroll">
+          <table class="table table-bordered shadow bg-body rounded">
+            <thead>
+              <tr style="font-weight: bold">
+                <th scope="col">skill set</th>
+                <th scope="col">juniar</th>
+                <th scope="col">intermidiate</th>
+                <th scope="col">senior</th>
+                <th scope="col">lead</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let person of persons; let i = index">
+                <th scope="row">{{ person }}</th>
+                <td *ngFor="let designation of designations; let j = index">
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      [name]="person"
+                      [value]="designation"
+                      [formControlName]="person"
+                      [id]="person + designation"
+                      [checked]="skillSets[person] == designation"
+                      (change)="changeSelection(person, designation, $event)"
+                      required
+                    />
+                    <label
+                      class="form-check-label"
+                      for="{{ person + designation }}"
+                    >
+                    </label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <p class="font-weight-900">Offshore Training Certificate</p>
+      </div>
+
+      <div class="offshore">
+        <div class="row mobile-row">
+          <div class="col">
+            <select class="form-control" formControlName="desc">
+              <option selected value="">Select One</option>
+              <option value="MIST">MIST</option>
+              <option value="FOET">FOET</option>
+              <option value="HUET">HUET</option>
+            </select>
+          </div>
+
+          <div class="col">
+            Upload certification(If Any) :
+
+            <button class="browse" (change)="traningcertificate($event)">
+              <label for="upload2">
+                <input
+                  type="file"
+                  aria-hidden="true"
+                  id="upload2"
+                  accept="image/"
+                  style="display: none"
+                  formControlName="training_certificate"
+                />
+                Browse
+              </label>
+            </button>
+          </div>
+
+          <div
+            *ngIf="
+              setprofileform.get('desc')?.hasError('required') &&
+              setprofileform.get('desc')?.touched
+            "
+            style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+          >
+            Certificate is required
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-3">
+        <div class="col d-flex justify-content-center">
+          <button
+            class="btn btn-primary"
+            id="submit_btn"
+            (click)="submitData()"
+          >
+            Submit & Procceed
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

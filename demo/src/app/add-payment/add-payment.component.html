@@ -1,0 +1,165 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div
+    style="width: 40%; margin: 2% auto"
+    class="shadow p-3 bg-body rounded p-5"
+  >
+    <p class="data text-center fw-bolder">ADD PAYMENT</p>
+    <p class="text-center">
+      Please provide your name ,Credit card number , CVV and Expiry date of your
+      card
+    </p>
+    <form [formGroup]="addpayment">
+      <div class="row">
+        <input
+          type="text"
+          placeholder="Enter name"
+          class="input"
+          formControlName="fullName"
+        />
+        <div
+          *ngIf="
+            addpayment.get('fullName')?.hasError('required') &&
+            addpayment.get('fullName')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          Name is required
+        </div>
+      </div>
+      <div class="row">
+        <input
+          type="number"
+          placeholder="Enter card number"
+          class="input"
+          formControlName="cardNo"
+        />
+        <div
+          *ngIf="
+            addpayment.get('cardNo')?.hasError('required') &&
+            addpayment.get('cardNo')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          Card No is required
+        </div>
+        <div
+          *ngIf="
+            addpayment.get('cardNo')?.hasError('min') &&
+            addpayment.get('cardNo')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          Card No length should be 16
+        </div>
+        <div
+          *ngIf="
+            addpayment.get('cardNo')?.hasError('max') &&
+            addpayment.get('cardNo')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          Card No length should be 16
+        </div>
+      </div>
+      <div class="row">
+        <label>Expiry Date</label>
+        <input
+          type="month"
+          placeholder="MM / YY"
+          class="input"
+          formControlName="expiryDate"
+        />
+        <div
+          *ngIf="
+            addpayment.get('expiryDate')?.hasError('required') &&
+            addpayment.get('expiryDate')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          Date is required
+        </div>
+      </div>
+
+      <div class="row" style="position: relative">
+        <input
+          type="text"
+          placeholder="Enter CVV"
+          formControlName="cvv"
+          class="input"
+          style="color: transparent; user-select: none"
+          (keypress)="numberOnly($event)"
+          [(ngModel)]="cvv"
+        />
+        <div class="visibleInp input">
+          {{ cvv | hide }}
+        </div>
+        <div
+          *ngIf="
+            addpayment.get('cvv')?.hasError('required') &&
+            addpayment.get('cvv')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          CVV is required
+        </div>
+        <div
+          *ngIf="
+            addpayment.get('cvv')?.hasError('min') &&
+            addpayment.get('cvv')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          CVV number should be size of 3
+        </div>
+        <div
+          *ngIf="
+            addpayment.get('cvv')?.hasError('max') &&
+            addpayment.get('cvv')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          CVV number should be size of 3
+        </div>
+      </div>
+      <div class="row">
+        <input
+          type="number"
+          placeholder="Enter amount"
+          class="input"
+          formControlName="amount"
+        />
+        <div
+          *ngIf="
+            addpayment.get('amount')?.hasError('required') &&
+            addpayment.get('amount')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          Amount is required
+        </div>
+        <div
+          *ngIf="
+            addpayment.get('amount')?.hasError('min') &&
+            addpayment.get('amount')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: -20px"
+        >
+          Amount must be greater then 0
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-primary pb-2 pt-2 ps-5 pe-5"
+            (click)="add()"
+          >
+            Confirm Payment
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

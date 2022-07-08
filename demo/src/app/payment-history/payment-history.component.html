@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row m-2">
+    <p>Payment History</p>
+    <hr />
+  </div>
+  <table class="tables table mt-2">
+    <thead>
+      <tr>
+        <th scope="col">Time</th>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
+        <th (click)="sort('fullName')" scope="col">
+          Recruiter Name &nbsp;&nbsp;<i class="bi bi-sort-up"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      *ngFor="
+        let obj of paymenthistorylistarr
+          | paginate: { itemsPerPage: 3, currentPage: currentpage }
+          | orderBy: key:reverse
+      "
+    >
+      <tr>
+        <th scope="row">{{ obj.createdAt | date: "mediumTime" }}</th>
+        <td>{{ obj.createdAt | date: "dd/MM/yyyy" }}</td>
+        <td>{{ obj.amount }}</td>
+        <td>{{ obj.fullName }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pagination-controls
+    (pageChange)="currentpage = $event"
+  ></pagination-controls>
+</div>

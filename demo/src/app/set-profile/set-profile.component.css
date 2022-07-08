@@ -1,0 +1,118 @@
+.logo {
+  margin: 0;
+  padding-top: 20px;
+  background-color: white;
+  padding-inline: 85px;
+}
+
+.form-control {
+  border-radius: 50px;
+}
+
+.main {
+  background-color: white;
+}
+
+#submit_btn {
+  border-radius: 50px;
+  background-image: linear-gradient(to left, #21CE99, #1AF5B2);
+  border-color: #1AF5B2;
+}
+
+.browse {
+  border-color: aqua;
+  color: aqua;
+  background-color: rgb(203, 255, 237);
+  border-radius: 5px;
+  float: right;
+}
+
+p {
+  font-weight: 200;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.table-res::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.table-res {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  overflow: scroll;
+  margin-inline: auto;
+  padding: 0;
+  padding-block: 20px;
+}
+
+.content {
+  padding-inline: 33px;
+  padding-block: 21px;
+}
+
+input,
+select {
+  height: 50px;
+  text-indent: 10px;
+
+}
+
+.basic-details,
+.education {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  margin-block: 20px;
+}
+
+.hr {
+  width: 100%;
+  background-color: rgba(88, 76, 76, 0.5);
+  height: 1px;
+}
+
+.font-weight-900 {
+  font-weight: 900;
+}
+
+.offshore>.row,
+.education>.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: window;
+  padding: 2px 50px 2px 14px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.45),
+      rgba(255, 255, 255, 0.45)), url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png);
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+@media (max-width:700px) {
+
+  .container>div {
+    margin: 0;
+    padding-inline: 15px;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .mobile-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .table-res {
+    margin: 0 !important;
+  }
+}

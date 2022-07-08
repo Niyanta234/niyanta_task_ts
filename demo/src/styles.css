@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+body {
+    background-image: url('assets/images/layer.png');
+
+}
+
+html, body{
+	height: 100%;
+	width : 100%
+}
+.logo {
+    margin-inline: 80px;
+    padding-top: 45px;
+}
+
+.main-wrapper {
+    
+    background-image: url(./assets/images/group.png);
+    background-repeat: no-repeat;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    background-position: top right;
+        background-size: 571px;
+    
+    
+}

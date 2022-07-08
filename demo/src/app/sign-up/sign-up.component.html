@@ -1,0 +1,293 @@
+<!-- <link rel="stylesheet" href="style.css"> -->
+<div class="main-wrapper">
+  <div class="logo">
+    <img src="../../assets/images/logo.png" height="60px" alt="" />
+  </div>
+  <div class="wrapper" style="height: calc(100% - 160px)">
+    <div class="container" style="height: 100%">
+      <div class="row-1 w-500 justify-content-end m-4 bg-body rounded">
+        <div class="row">
+          <div class="">
+            <div>
+              <button class="login" (click)="signin()">Sign In</button>
+              <button class="signup" (click)="signup()">Sign Up</button>
+            </div>
+
+            <div
+              class="text-center login-subline"
+              style="background-color: white"
+            >
+              <p>
+                Please Provide the following details to login into the system
+              </p>
+            </div>
+
+            <form [formGroup]="loginform">
+              <div class="login-form mt-50" *ngIf="isLogin">
+                <div class="input-icons" style="position: relative">
+                  <i
+                    class="fa fa-envelope"
+                    style="
+                      position: absolute;
+                      top: 19px;
+                      left: 20px;
+                      font-size: 20px;
+                      color: gray;
+                    "
+                  ></i>
+                  <input
+                    type="text"
+                    formControlName="email"
+                    placeholder="Email"
+                    class="form-control p-3"
+                    style="text-indent: 35px"
+                  />
+                  <div
+                    *ngIf="
+                      loginform.get('email')?.hasError('required') &&
+                      loginform.get('email')?.touched
+                    "
+                    style="color: red; line-height: 1; height: 7px"
+                  >
+                    Email is required
+                  </div>
+                  <div
+                    *ngIf="
+                      loginform.get('email')?.hasError('email') &&
+                      loginform.get('email')?.touched
+                    "
+                    style="color: red; line-height: 1; height: 7px"
+                  >
+                    Email should be like abc@gmail.com
+                  </div>
+                </div>
+
+                <div class="input-icons" style="position: relative">
+                  <i
+                    class="fa-solid fa-eye-slash"
+                    style="
+                      position: absolute;
+                      top: 19px;
+                      left: 20px;
+                      font-size: 20px;
+                      color: gray;
+                    "
+                  ></i>
+                  <input
+                    type="password"
+                    formControlName="password"
+                    placeholder="Password"
+                    class="form-control p-3"
+                    style="text-indent: 35px"
+                  />
+                  <div
+                    *ngIf="
+                      loginform.get('password')?.hasError('required') &&
+                      loginform.get('password')?.touched
+                    "
+                    style="color: red; line-height: 1; height: 7px"
+                  >
+                    Password is required
+                  </div>
+                  <div
+                    *ngIf="
+                      loginform.get('password')?.hasError('minlength') &&
+                      loginform.get('password')?.touched
+                    "
+                    style="color: red; line-height: 1; height: 7px"
+                  >
+                    Password length should be greater than 8
+                  </div>
+                </div>
+
+                <div class="row mt-30">
+                  <div class="col">
+                    <button class="btn btn-primary" (click)="signIn()">
+                      Sign In
+                    </button>
+                  </div>
+
+                  <div class="col d-flex flex-row-reverse m-3">
+                    <a routerLink="/forgotpassword">Forgot Password ?</a>
+                  </div>
+                </div>
+
+                <p class="text-muted p-3 text-center">
+                  Don't have an account ?
+                  <a
+                    class="text-reset"
+                    (click)="signup()"
+                    style="color: #1af5b2 !important; font-weight: 900"
+                    >Sign Up</a
+                  >.
+                </p>
+              </div>
+            </form>
+
+            <div class="col">
+              <form [formGroup]="signupform">
+                <div class="signup-form" *ngIf="isSignUp">
+                  <div>
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Full Name"
+                        class="form-control p-3"
+                        formControlName="fullName"
+                      />
+                      <div
+                        *ngIf="
+                          signupform.get('fullName')?.hasError('required') &&
+                          signupform.get('fullName')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Name is required
+                      </div>
+                    </div>
+
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Email Id"
+                        class="form-control p-3"
+                        formControlName="email"
+                      />
+                      <div
+                        *ngIf="
+                          signupform.get('email')?.hasError('required') &&
+                          signupform.get('email')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Email is required
+                      </div>
+                      <div
+                        *ngIf="
+                          signupform.get('email')?.hasError('email') &&
+                          signupform.get('email')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Email should be like abc@gmail.com
+                      </div>
+                    </div>
+
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Phone Number"
+                        class="form-control p-3"
+                        formControlName="mobileNo"
+                      />
+                      <div
+                        *ngIf="
+                          signupform.get('mobileNo')?.hasError('required') &&
+                          signupform.get('mobileNo')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Mobile No is required
+                      </div>
+                      <div
+                        *ngIf="
+                          signupform.get('mobileNo')?.hasError('min') &&
+                          signupform.get('mobileNo')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Mobile No length is 10
+                      </div>
+                      <div
+                        *ngIf="
+                          signupform.get('mobileNo')?.hasError('max') &&
+                          signupform.get('mobileNo')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Mobile No length is 10
+                      </div>
+                    </div>
+
+                    <div class="input-icons" style="position: relative">
+                      <i
+                        class="fa-solid fa-eye-slash"
+                        style="
+                          position: absolute;
+                          right: 0px;
+                          top: 0px;
+                          padding: 10px 12px;
+                          font-size: 21px;
+                          color: gray;
+                        "
+                      ></i>
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        class="form-control"
+                        style="text-indent: 20px"
+                        formControlName="password"
+                      />
+                      <div
+                        *ngIf="
+                          signupform.get('password')?.hasError('required') &&
+                          signupform.get('password')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Password is required
+                      </div>
+                      <div
+                        *ngIf="
+                          signupform.get('password')?.hasError('minlength') &&
+                          signupform.get('password')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Password length should be greater than 8
+                      </div>
+                    </div>
+
+                    <div>
+                      <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        class="form-control p-3"
+                        formControlName="confirmpass"
+                      />
+
+                      
+                      <div
+                        *ngIf="
+                          signupform.get('confirmpass')?.hasError('passdidntmatch') &&
+                          signupform.get('confirmpass')?.touched
+                        "
+                        style="color: red; line-height: 1; height: 7px"
+                      >
+                        Password did not match
+                      </div>
+                    </div>
+
+                    <div class="row m-3">
+                      <div class="col">
+                        <button class="btn" type="submit" (click)="signUp()">
+                          SignUp
+                        </button>
+                      </div>
+
+                      <div class="col d-flex flex-row-reverse m-3">
+                        <a style="color: black" (click)="signin()"
+                          >BACK TO LOGIN</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
