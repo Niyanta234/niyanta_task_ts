@@ -16,7 +16,7 @@ const payment = async (req: Request, res: Response, next: NextFunction) => {
     } catch (e) {
         // console.log(e);
         
-        res.status(500).json({error: e})
+        res.status(400).json({error: e})
     }
 }
 
