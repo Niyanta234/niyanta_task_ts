@@ -4,13 +4,11 @@ const profileSchema = new mongoose.Schema({
     avatar: {
         public_id: {
             type: String,
-            required: true,
-            default: '1hjkjhd'
+            required: true
         },
         url: {
             type: String,
-            required: true,
-            default: 'xyz.png'
+            required: true
         }
     },
     dateOfBirth: {
@@ -61,32 +59,30 @@ const profileSchema = new mongoose.Schema({
     degreeUpload: {
         public_id: {
             type: String,
-            required: true,
-            default: 'xyz'
+            required: true
         },
         url: {
             type: String,
-            required: true,
-            default: 'xyz.png'
+            required: true
         }
     },
     skillSetsAndTrade: {
-        skillset: {
-            welder: {
-                type: String,
-                enum: ['juniar', 'intermidiate', 'senior', 'lead']
+        skillSets: {
+            Welder: {
+                type: String
+                // enum: ['Juniar', 'Intermidiate', 'Senior', 'Lead']
             },
-            fitter: {
-                type: String,
-                enum: ['juniar', 'intermidiate', 'senior', 'lead']
+            Fitter: {
+                type: String
+                // enum: ['Juniar', 'Intermidiate', 'Senior', 'Lead']
             },
-            wigger: {
-                type: String,
-                enum: ['juniar', 'intermidiate', 'senior', 'lead']
+            Wigger: {
+                type: String
+                // enum: ['Juniar', 'Intermidiate', 'Senior', 'Lead']
             },
-            sactfolder: {
-                type: String,
-                enum: ['juniar', 'intermidiate', 'senior', 'lead']
+            Sactfolder: {
+                type: String
+                // enum: ['Juniar', 'Intermidiate', 'Senior', 'Lead']
             }
         }
     },
@@ -97,13 +93,11 @@ const profileSchema = new mongoose.Schema({
     certificateUpload: {
         public_id: {
             type: String,
-            required: true,
-            default: '1hjkjhd'
+            required: true
         },
         url: {
             type: String,
-            required: true,
-            default: 'xyz.png'
+            required: true
         }
     }
 });

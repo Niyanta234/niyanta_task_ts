@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema<UserDoc>({
         type:String,
         required: [true, "Please Enter Your Full Name"],
         maxlength: [30, "Full Name cannot exceed 30 characters"],
-        minlength: [4, "Full Name should have more than 4 characters"],
+        minlength: [3, "Full Name should have more than 4 characters"],
     },
     email:{
         type: String,

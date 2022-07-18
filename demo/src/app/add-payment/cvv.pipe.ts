@@ -4,6 +4,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class CvvPipe implements PipeTransform {
   transform(cvv: string): string {
+    if(!cvv){
+      cvv='';
+    }
     return cvv.replace(/./g, "X");
   }
 }

@@ -24,25 +24,25 @@
             />
 
             <img
-              *ngIf="!imagePath"
-              src="../assets/images/user.svg"
-              alt=""
-              height="100px"
-              width="100px"
-              style="cursor: pointer"
-            />
-            <img
-              *ngIf="imagePath"
               [src]="url"
               alt=""
               height="100px"
               width="100px"
-              style="border-radius: 100%"
+              style="cursor: pointer; border-radius: 100%"
             />
           </label>
         </div>
+        <div
+          class="pb-1"
+          *ngIf="
+            setprofileform.get('avatar')?.hasError('required') &&
+            setprofileform.get('avatar')?.touched
+          "
+          style="color: red; line-height: 1; margin-top: 20px"
+        >
+          Avatar image is required
+        </div>
       </div>
-
       <div class="row">
         <p class="font-weight-900">Basic Details :</p>
       </div>
@@ -70,178 +70,254 @@
           <div class="col"></div>
         </div>
 
-        <div class="row">
-          <div class="col">
-            <input
-              type="text"
-              placeholder="Address line 1"
-              class="form-control"
-              formControlName="addressLine1"
-            />
-            <div
-              *ngIf="
-                setprofileform.get('addressLine1')?.hasError('required') &&
-                setprofileform.get('addressLine1')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              Address is required
+        <form formGroupName="address" class="basic-details">
+          <div class="row">
+            <div class="col">
+              <input
+                type="text"
+                placeholder="Address line 1"
+                class="form-control"
+                formControlName="addressLine1"
+                maxlength="20"
+              />
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('addressLine1')
+                    ?.hasError('required') &&
+                  setprofileform.controls['address'].get('addressLine1')
+                    ?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                Address is required
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col">
-            <input
-              type="text"
-              placeholder="Address line 2"
-              class="form-control"
-              formControlName="addressLine2"
-            />
-            <div
-              *ngIf="
-                setprofileform.get('addressLine2')?.hasError('required') &&
-                setprofileform.get('addressLine2')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              Address is required
+          <div class="row">
+            <div class="col">
+              <input
+                type="text"
+                placeholder="Address line 2"
+                class="form-control"
+                formControlName="addressLine2"
+                maxlength="20"
+              />
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('addressLine2')
+                    ?.hasError('required') &&
+                  setprofileform.controls['address'].get('addressLine2')
+                    ?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                Address is required
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="row mobile-row">
-          <div class="col">
-            <input
-              type="text"
-              placeholder="Postal code"
-              class="form-control"
-              formControlName="postalCode"
-            />
-            <div
-              *ngIf="
-                setprofileform.get('postalCode')?.hasError('required') &&
-                setprofileform.get('postalCode')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              Postal Code is required
+          <div class="row mobile-row">
+            <div class="col">
+              <input
+                type="text"
+                placeholder="Postal code"
+                class="form-control"
+                formControlName="postalCode"
+              />
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('postalCode')
+                    ?.hasError('required') &&
+                  setprofileform.controls['address'].get('postalCode')?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                Postal Code is required
+              </div>
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('postalCode')
+                    ?.hasError('min') &&
+                  setprofileform.controls['address'].get('postalCode')?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                Postal Code digit size is 6
+              </div>
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('postalCode')
+                    ?.hasError('max') &&
+                  setprofileform.controls['address'].get('postalCode')?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                Postal Code digit size is 6
+              </div>
             </div>
-            <div
-              *ngIf="
-                setprofileform.get('postalCode')?.hasError('min') &&
-                setprofileform.get('postalCode')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              Postal Code digit size is 6
-            </div>
-            <div
-              *ngIf="
-                setprofileform.get('postalCode')?.hasError('max') &&
-                setprofileform.get('postalCode')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              Postal Code digit size is 6
+            <div class="col">
+              <div id="city">
+                <select class="form-control" formControlName="city">
+                  <option selected value="">City</option>
+                  <option value="Ahmedabad">Ahmedabad</option>
+                  <option value="Baroda">Baroda</option>
+                  <option value="Pune">Pune</option>
+                </select>
+              </div>
+
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('city')
+                    ?.hasError('required') &&
+                  setprofileform.controls['address'].get('city')?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                City is required
+              </div>
             </div>
           </div>
-          <div class="col">
-            <div id="city">
-              <select class="form-control" formControlName="city">
-                <option selected value="">City</option>
-                <option value="Ahmedabad">Ahmedabad</option>
-                <option value="Baroda">Baroda</option>
-                <option value="Pune">Pune</option>
+
+          <div class="row mobile-row">
+            <div class="col">
+              <select class="form-control" formControlName="state">
+                <option selected value="">State</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Goa">Goa</option>
               </select>
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('state')
+                    ?.hasError('required') &&
+                  setprofileform.controls['address'].get('state')?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                State is required
+              </div>
             </div>
 
-            <div
-              *ngIf="
-                setprofileform.get('city')?.hasError('required') &&
-                setprofileform.get('city')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              City is required
-            </div>
-          </div>
-        </div>
-
-        <div class="row mobile-row">
-          <div class="col">
-            <select class="form-control" formControlName="state">
-              <option selected value="">State</option>
-              <option value="Gujarat">Gujarat</option>
-              <option value="Delhi">Delhi</option>
-              <option value="Goa">Goa</option>
-            </select>
-            <div
-              *ngIf="
-                setprofileform.get('state')?.hasError('required') &&
-                setprofileform.get('state')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              State is required
+            <div class="col">
+              <select class="form-control" formControlName="LGA">
+                <option selected value="">LGA</option>
+                <option value="Student">Student</option>
+                <option value="Employee">Employee</option>
+                <option value="Worker">Worker</option>
+              </select>
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('LGA')
+                    ?.hasError('required') &&
+                  setprofileform.controls['address'].get('LGA')?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                LGA is required
+              </div>
             </div>
           </div>
 
-          <div class="col">
-            <select class="form-control" formControlName="LGA">
-              <option selected value="">LGA</option>
-              <option value="Student">Student</option>
-              <option value="Employee">Employee</option>
-              <option value="Worker">Worker</option>
-            </select>
-            <div
-              *ngIf="
-                setprofileform.get('LGA')?.hasError('required') &&
-                setprofileform.get('LGA')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              LGA is required
+          <div class="row mobile-row">
+            <div class="col">
+              <select class="form-control" formControlName="country">
+                <option selected value="">Country</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+              </select>
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('country')
+                    ?.hasError('required') &&
+                  setprofileform.controls['address'].get('country')?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                Country is required
+              </div>
+            </div>
+            <div class="col">
+              <select class="form-control" formControlName="DailyWages">
+                <option selected value="">Daily Woges</option>
+                <option value="28.9">28.90</option>
+                <option value="66.92">66.92</option>
+                <option value="88.66">88.66</option>
+              </select>
+              <div
+                *ngIf="
+                  setprofileform.controls['address']
+                    .get('DailyWages')
+                    ?.hasError('required') &&
+                  setprofileform.controls['address'].get('DailyWages')?.touched
+                "
+                style="
+                  color: red;
+                  line-height: 1;
+                  height: 7px;
+                  margin-top: 20px;
+                "
+              >
+                Daily Wages is required
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="row mobile-row">
-          <div class="col">
-            <select class="form-control" formControlName="country">
-              <option selected value="">Country</option>
-              <option value="India">India</option>
-              <option value="USA">USA</option>
-              <option value="UK">UK</option>
-            </select>
-            <div
-              *ngIf="
-                setprofileform.get('country')?.hasError('required') &&
-                setprofileform.get('country')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              Country is required
-            </div>
-          </div>
-          <div class="col">
-            <select class="form-control" formControlName="DailyWages">
-              <option selected value="">Daily Woges</option>
-              <option value="28.90">28.90</option>
-              <option value="66.92">66.92</option>
-              <option value="88.66">88.66</option>
-            </select>
-            <div
-              *ngIf="
-                setprofileform.get('DailyWages')?.hasError('required') &&
-                setprofileform.get('DailyWages')?.touched
-              "
-              style="color: red; line-height: 1; height: 7px; margin-top: 20px"
-            >
-              Daily Wages is required
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
 
       <div class="row">
@@ -268,7 +344,7 @@
               Degree Detail is required
             </div>
           </div>
-          <div class="col">
+          <div class="col mt-2">
             Upload certification(If Any) :
             <button class="browse" (change)="educertificate($event)">
               <label for="upload1">
@@ -289,7 +365,15 @@
 
       <div class="row">
         <p class="font-weight-900">Skill Sets & Trade :</p>
-
+        <div
+          *ngIf="
+            setprofileform.get('skillSetsAndTrade')?.hasError('required') &&
+            setprofileform.get('skillSetsAndTrade')?.touched
+          "
+          style="color: red; line-height: 1; height: 7px; margin-top: 20px"
+        >
+          Skill sets is reqired
+        </div>
         <div class="row m-2 table-res" style="overflow: scroll">
           <table class="table table-bordered shadow bg-body rounded">
             <thead>
@@ -302,16 +386,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let person of persons; let i = index">
+              <tr *ngFor="let person of persons">
                 <th scope="row">{{ person }}</th>
-                <td *ngFor="let designation of designations; let j = index">
+                <td *ngFor="let designation of designations">
                   <div class="form-check">
                     <input
                       type="checkbox"
                       class="form-check-input"
-                      [name]="person"
+                      formControlName="skillSetsAndTrade"
+                      name="skillset"
                       [value]="designation"
-                      [formControlName]="person"
                       [id]="person + designation"
                       [checked]="skillSets[person] == designation"
                       (change)="changeSelection(person, designation, $event)"
@@ -345,7 +429,7 @@
             </select>
           </div>
 
-          <div class="col">
+          <div class="col mt-2">
             Upload certification(If Any) :
 
             <button class="browse" (change)="traningcertificate($event)">

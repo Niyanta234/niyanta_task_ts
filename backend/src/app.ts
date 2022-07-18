@@ -1,4 +1,4 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application } from 'express';
 import mongoose from 'mongoose';
 import { v2 as cloudinary } from 'cloudinary';
 import bodyParser from 'body-parser';
@@ -32,7 +32,7 @@ connect();
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors())
+app.use(cors({ credentials: true, origin: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(

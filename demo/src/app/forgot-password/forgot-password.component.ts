@@ -37,7 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.auth.forgot_pass(this.forgotPassword.value)
     .subscribe(res=>{
       // console.log(res);
-      alert("check your gmail inbox");
+      alert("check your mail inbox");
     },(err)=>{
       // console.log(err);
       if(err.length!=0){

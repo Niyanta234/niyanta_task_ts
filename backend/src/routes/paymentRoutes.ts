@@ -1,9 +1,9 @@
-import express from "express"
-const router = express.Router()
-import controller from "../controller/paymentController";
+import express from 'express';
+const router = express.Router();
+import controller from '../controller/paymentController';
+import isAuthenticatedUser from '../middleware/auth';
 
+router.post('/addpayment', isAuthenticatedUser, controller.payment);
+router.get('/paymenthistory', isAuthenticatedUser, controller.getPaymentHistory);
 
-router.post('/addpayment', controller.payment);
-router.get('/paymenthistory', controller.getPaymentHistory)
-
-export default router
+export default router;

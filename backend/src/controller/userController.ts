@@ -5,7 +5,7 @@ import sendEmail from '../utils/sendEmail';
 
 // Sing Up
 const singUp = async (req: Request, res: Response, next: NextFunction) => {
-    // console.log('hii');
+    console.log('sign up request');
 
     try {
         const { fullName, email, mobileNo, password } = req.body;
@@ -15,11 +15,27 @@ const singUp = async (req: Request, res: Response, next: NextFunction) => {
             password,
             mobileNo
         });
-        sendToken(user, 200, res);
-    } catch (e) {
+        const message = `Your Account Sign Up with this email id ${req.body.email} if you are not that person then go in Website And reset your password`;
+        await sendEmail({
+            email: email,
+            subject: `Job Link Password Recovery`,
+            message
+        });
+        res.status(200).json({
+            user,
+            success: true,
+            message: `Email send  to ${email} Successfully`
+        });
+    } catch (e: any) {
+        if (e.code == 11000) {
+            return res.status(409).json({
+                message: 'Email Id already exists, Please try signIn'
+            });
+        }
         res.status(500).json({ error: e });
         console.log(e);
     }
+    // sendToken(user, 200, res);
 };
 
 // Sing In
@@ -30,15 +46,14 @@ const singIn = async (req: Request, res: Response, next: NextFunction) => {
     }
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
-        return res.status(401).json({ error: 'Invalid Email or Password' });
+        return res.status(401).json({ error: 'Invalid Email' });
     }
     const isPasswordMatched = await user.comparePassword(password);
     if (!isPasswordMatched) {
-        return res.status(401).json({ error: 'Invalid Email or Password' });
+        return res.status(401).json({ error: 'Invalid Password' });
     }
     sendToken(user, 200, res);
 };
-
 
 // Forget Password
 const forgotPassword = async (req: Request, res: Response, next: NextFunction) => {
@@ -74,7 +89,6 @@ const forgotPassword = async (req: Request, res: Response, next: NextFunction) =
     }
 };
 
-
 // reset password
 const resetPassword = async (req: Request, res: Response, next: NextFunction) => {
     // creating Token Hash
@@ -86,8 +100,8 @@ const resetPassword = async (req: Request, res: Response, next: NextFunction) =>
     if (!user) {
         return res.status(404).json({ error: 'Reset password Token Is Invalid Or Has Been Expired' });
     }
-    
-    user.password = req.body.password;
+
+    user.password = req.body.password.password;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 
@@ -97,13 +111,13 @@ const resetPassword = async (req: Request, res: Response, next: NextFunction) =>
 
 // Log Out Check cookie expires or not
 const logout = async (req: Request, res: Response, next: NextFunction) => {
-    res.cookie("token", null,{
+    res.cookie('token', null, {
         expires: new Date(Date.now()),
-        httpOnly: true,
-    })
-    res.status(200).json({
-        success:true,
-        message:"Logged Out",
+        httpOnly: true
     });
-}
-export default { singUp, singIn, forgotPassword, resetPassword, logout};
+    res.status(200).json({
+        success: true,
+        message: 'Logged Out'
+    });
+};
+export default { singUp, singIn, forgotPassword, resetPassword, logout };

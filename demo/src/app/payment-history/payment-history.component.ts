@@ -1,37 +1,61 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-payment-history',
   templateUrl: './payment-history.component.html',
-  styleUrls: ['./payment-history.component.css']
+  styleUrls: ['./payment-history.component.css'],
 })
 export class PaymentHistoryComponent implements OnInit {
+  paymentHistory: any = [];
 
-  paymenthistorylistarr: any = [];
+  constructor(private auth: AuthService, private route: Router) {}
 
-  constructor(private auth: AuthService) { }
-  
-  currentpage: number = 1;
+  currentPage = 1;
+  itemsPerPage = 3;
+  totalItems = 0;
 
+  sortBy = 'fullName';
+  isReverse = false;
 
   ngOnInit(): void {
-    this.auth.viewhistory(this.currentpage).subscribe((data:any) => {
-      // console.log(data)
-      this.paymenthistorylistarr = data.results;
-      console.log(this.paymenthistorylistarr)
-
-    })
-
-  
-
-  }
-  key:any='fullName';
-  reverse:boolean=false;
-  sort(key){
-    // console.log(key);
-   this.key=key;
-   this.reverse=!this.reverse;
+    this.getHistory();
   }
 
+  changePage(pageNo: any) {
+    this.currentPage = pageNo;
+    this.getHistory();
+  }
+
+  sort(key: string) {
+    if (this.sortBy == key) {
+      this.isReverse = !this.isReverse;
+    } else {
+      this.sortBy = key;
+    }
+    this.getHistory();
+  }
+
+  getHistory() {
+    const queryParams = {
+      itemsPerPage: this.itemsPerPage,
+      pageNo: this.currentPage,
+      sortBy: this.sortBy,
+      reverse: this.isReverse,
+    };
+    this.auth.viewhistory(queryParams).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.paymentHistory = data.results;
+        this.totalItems = data.count;
+      },
+      (err) => {
+        if (err.status == 401) {
+          this.route.navigate(['/signUp']);
+        }
+        console.log(err);
+      }
+    );
+  }
 }
