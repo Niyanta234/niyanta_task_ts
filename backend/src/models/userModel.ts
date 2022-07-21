@@ -12,6 +12,7 @@ export interface UserDoc extends Document {
     mobileNo: Number;
     resetPasswordToken: String | undefined;
     resetPasswordExpire: Date | undefined;
+    isActive : Boolean;
     comparePassword: (pw: string) => Promise<boolean>;
     getResetPasswordToken: any ;
 }
@@ -40,6 +41,10 @@ const UserSchema = new mongoose.Schema<UserDoc>({
         required:[true,"Please Enter Your Password"],
         minlength:[8,"password should be grater than 8 characters"],
         select:false,
+    },
+    isActive:{
+        type:Boolean,
+        default: false,
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
@@ -82,4 +87,4 @@ UserSchema.methods.getResetPasswordToken = function(){
 }
 
 
- export default mongoose.model('User', UserSchema);
+ export default mongoose.model<UserDoc>('User', UserSchema);

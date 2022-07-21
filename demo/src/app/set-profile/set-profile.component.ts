@@ -59,6 +59,9 @@ export class SetProfileComponent implements OnInit {
           let { dateOfBirth, address, degreeDetails, desc, skillSetsAndTrade } =
             data.profile;
           this.skillSets = skillSetsAndTrade.skillSets;
+          if(this.skillSets){
+            this.setprofileform.get('skillSetsAndTrade')?.setErrors(null)
+            }
           dateOfBirth = dateOfBirth.split('T')[0];
           this.setprofileform.patchValue({
             dateOfBirth,

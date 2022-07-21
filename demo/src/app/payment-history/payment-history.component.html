@@ -7,10 +7,10 @@
   <table class="tables table mt-2">
     <thead>
       <tr>
-        <th (click)="sort('createdAt')" scope="col" class="time">Time</th>
+        <th scope="col" class="time">Time</th>
         <th (click)="sort('createdAt')" scope="col" class="date">
-          Date
-          <span *ngIf="sortBy === 'createdAt'" >
+          <i class="fas fa-sort"></i> &nbsp; Date
+          <span *ngIf="sortBy === 'createdAt'">
             <i
               class="bi"
               [ngClass]="isReverse ? 'bi-sort-up' : 'bi-sort-down'"
@@ -18,7 +18,7 @@
           </span>
         </th>
         <th (click)="sort('amount')" scope="col" class="amount">
-          Amount
+          <i class="fas fa-sort"></i>&nbsp; Amount
           <span *ngIf="sortBy === 'amount'">
             <i
               class="bi"
@@ -27,7 +27,7 @@
           </span>
         </th>
         <th (click)="sort('fullName')" scope="col" class="name">
-          Recruiter Name
+          <i class="fas fa-sort"></i>&nbsp; Recruiter Name
           <span *ngIf="sortBy === 'fullName'">
             <i
               class="bi"

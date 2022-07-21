@@ -3,6 +3,7 @@ const router = express.Router()
 import controller from '../controller/userController';
 
 router.post("/signup",controller.singUp );
+router.get("/verifyemail/:token",controller.verifingUser);
 router.post('/login', controller.singIn);
 router.post('/password/forgot', controller.forgotPassword);
 router.put('/resetpassword/:token', controller.resetPassword);

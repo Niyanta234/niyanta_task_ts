@@ -108,7 +108,11 @@ export class SignUpComponent implements OnInit {
           alert('Invalid Email,try signup');
           this.isSignUp = true;
           this.isLogin = false;
-        } else {
+        }else if(err.error.error=="Please confirm your email to login"){
+          alert('Please confirm your email to login');
+          
+        } 
+        else {
           alert('please check your email id this user is not registered');
           this.isSignUp = true;
           this.isLogin = false;
